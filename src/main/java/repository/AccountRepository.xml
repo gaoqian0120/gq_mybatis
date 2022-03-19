@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="repository.AccountRepository">
+        <insert id="asve" parameterType="entity.Account">
+            insert into gq_mybatis.account (id,username,password,age) values(#{id},#{username},#{password},#{age})
+        </insert>
+    <update id="update" parameterType="entity.Account">
+        update account
+        <set>
+            <if test="username!=null">
+                username = #{username},
+            </if>
+            <if test="password!=null">
+                password = #{password},
+            </if>
+            <if test="age!=0">
+                age = #{age}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="long">
+        delete from account where id = #{id}
+    </delete>
+    <select id="findById" parameterType="long" resultType="entity.Account">
+        select * from account where id = #{id}
+    </select>
+    <select id="findAll" parameterType="long" resultType="entity.Account">
+        select * from account
+    </select>
+    <select id="findByName" parameterType="java.lang.String" resultType="entity.Account">
+        select * from account where username = #{username}
+    </select>
+    <select id="findById2" parameterType="java.lang.Long" resultType="entity.Account">
+        select * from account where id = #{id}
+    </select>
+    <select id="findByNameAndAge" resultType="entity.Account">
+        select * from account where username = #{arg0} and age = #{arg1}
+    </select>
+    <select id="count" resultType="int">
+        select count(id) from account
+    </select>
+    <select id="count2" resultType="java.lang.Integer">
+        select count(id) from account
+    </select>
+    <select id="findNameById" resultType="java.lang.String">
+        select username from account where id = #{id}
+    </select>
+    <select id="findByAccount" parameterType="entity.Account" resultType="entity.Account">
+        select * from account
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id!=0">
+                id = #{id}
+            </if>
+            <if test="username!=null">
+                and username = #{username}
+            </if>
+            <if test="password!=null">
+                and password = #{password}
+            </if>
+            <if test="age!=0">
+                and age = #{age}
+            </if>
+        </trim>
+    </select>
+
+    <select id="findByIds" parameterType="entity.Account" resultType="entity.Account">
+        select * from account
+        <where>
+            <foreach collection="ids" open="id in (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>

@@ -17,8 +17,8 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <!--数据库连接信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/springmvc?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;rewriteBatchedStatements=true"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/gq_mybatis?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;rewriteBatchedStatements=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="gaoqian"/>
             </dataSource>
@@ -26,7 +26,9 @@
     </environments>
     <mappers>
         <!--引入映射文件-->
-        <mapper resource="mapper/StudentsMapper.xml"/>
+        <mapper resource="mapper/AccountMapper.xml"/>
+        <mapper resource="repository/AccountRepository.xml"/>
+        <!--<package name="mapper"/>-->
 
     </mappers>
 
